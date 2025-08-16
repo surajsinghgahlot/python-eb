@@ -75,11 +75,7 @@ variable "github_branch" {
   default     = "main"
 }
 
-variable "github_connection_arn" {
-  description = "GitHub connection ARN from CodeStar"
+variable "github_oauth_token" {
+  description = "GitHub OAuth token for CodePipeline"
   type        = string
 }
-
-
-
-

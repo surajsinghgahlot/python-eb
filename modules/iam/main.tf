@@ -191,9 +191,14 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
       {
         Effect = "Allow"
         Action = [
-          "codestar-connections:UseConnection"
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:PutObject"
         ]
-        Resource = "*"
+        Resource = [
+          "arn:aws:s3:::elasticbeanstalk-*",
+          "arn:aws:s3:::elasticbeanstalk-*/*"
+        ]
       }
     ]
   })
