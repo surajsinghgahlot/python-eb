@@ -1,6 +1,7 @@
 import json
 import boto3
 import os
+from datetime import datetime
 from botocore.exceptions import ClientError
 from flask import Flask, request, jsonify
 
@@ -29,9 +30,14 @@ def get_secret_value(secret_arn, key):
 def healthcheck():
     return "healthy",200
 
-@app.route('/test')
-def test():
-    return {'message': 'Pipeline deployment successful!', 'timestamp': datetime.now().isoformat()}
+@app.route('/pipeline-test')
+def pipeline_test():
+    return {
+        'message': 'CI/CD Pipeline is working!',
+        'timestamp': datetime.now().isoformat(),
+        'version': '1.0.1',
+        'status': 'deployed'
+    }
 
 @app.route("/", methods=["GET"])
 def fetch_secret():
