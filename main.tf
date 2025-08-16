@@ -13,7 +13,8 @@ module "vpc" {
 module "iam" {
   source = "./modules/iam"
 
-  environment = var.environment
+  environment      = var.environment
+  application_name = var.application_name
 }
 
 # Elastic Beanstalk Module
