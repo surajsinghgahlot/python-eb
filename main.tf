@@ -41,8 +41,10 @@ module "codepipeline" {
   
   environment                        = var.environment
   application_name                   = var.application_name
-  codecommit_repository_name         = var.codecommit_repository_name
-  branch_name                        = var.branch_name
+  github_owner                       = var.github_owner
+  github_repository                  = var.github_repository
+  github_branch                      = var.github_branch
+  github_connection_arn              = var.github_connection_arn
   codebuild_service_role_arn         = module.iam.codebuild_service_role_arn
   codepipeline_service_role_arn      = module.iam.codepipeline_service_role_arn
   elastic_beanstalk_application_name = module.elastic_beanstalk.application_name
