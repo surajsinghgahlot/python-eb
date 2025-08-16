@@ -191,11 +191,7 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
       {
         Effect = "Allow"
         Action = [
-          "codecommit:CancelUploadArchive",
-          "codecommit:GetBranch",
-          "codecommit:GetCommit",
-          "codecommit:GetUploadArchiveStatus",
-          "codecommit:UploadArchive"
+          "codestar-connections:UseConnection"
         ]
         Resource = "*"
       }

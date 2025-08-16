@@ -13,6 +13,7 @@ resource "aws_elastic_beanstalk_application" "app" {
 resource "aws_elastic_beanstalk_environment" "env" {
   name                = "${var.application_name}-${var.environment}"
   application         = aws_elastic_beanstalk_application.app.name
+  version_label       = aws_elastic_beanstalk_application_version.app_version.name
   solution_stack_name = var.solution_stack_name
 
   # Environment variables
