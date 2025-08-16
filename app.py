@@ -29,6 +29,10 @@ def get_secret_value(secret_arn, key):
 def healthcheck():
     return "healthy",200
 
+@app.route('/test')
+def test():
+    return {'message': 'Pipeline deployment successful!', 'timestamp': datetime.now().isoformat()}
+
 @app.route("/", methods=["GET"])
 def fetch_secret():
     key = request.args.get("key")
