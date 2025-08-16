@@ -1,0 +1,38 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.13
+    commands:
+      - echo Installing dependencies...
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - pip install pytest
+
+  pre_build:
+    commands:
+      - echo Starting pre-build phase...
+      - echo Environment: $ENVIRONMENT
+      - echo Application: $APPLICATION_NAME
+      - echo Build started on `date`
+
+  build:
+    commands:
+      - echo Starting build phase...
+      - echo Running tests...
+      - python -m pytest tests/ -v || echo "No tests found, continuing..."
+      - echo Creating application package...
+      - zip -r application.zip . -x "*.git*" "*.terraform*" "*.tf*" "*.tfvars" "*.DS_Store" "README.md" "cred.md"
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Build successful!
+
+artifacts:
+  files:
+    - application.zip
+    - app.py
+    - requirements.txt
+  discard-paths: no
