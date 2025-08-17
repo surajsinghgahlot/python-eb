@@ -249,6 +249,8 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
           "s3:GetObject",
           "s3:GetObjectVersion",
           "s3:PutObject",
+          "s3:DeleteObject",
+          "s3:DeleteObjectVersion",
           "s3:CreateBucket",
           "s3:DeleteBucket",
           "s3:ListBucket",
