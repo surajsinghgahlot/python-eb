@@ -202,6 +202,12 @@ resource "aws_iam_role" "codepipeline_service_role" {
   }
 }
 
+# Attach the AWS managed policy for CodePipeline
+resource "aws_iam_role_policy_attachment" "codepipeline_service_role_policy_attachment" {
+  role       = aws_iam_role.codepipeline_service_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSCodePipeline_FullAccess"
+}
+
 resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
   name = "${var.environment}-codepipeline-service-role-policy"
   role = aws_iam_role.codepipeline_service_role.id
@@ -242,11 +248,33 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
         Action = [
           "s3:GetObject",
           "s3:GetObjectVersion",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:CreateBucket",
+          "s3:DeleteBucket",
+          "s3:ListBucket",
+          "s3:GetBucketLocation",
+          "s3:GetBucketPolicy",
+          "s3:PutBucketPolicy",
+          "s3:DeleteBucketPolicy"
         ]
         Resource = [
           "arn:aws:s3:::elasticbeanstalk-*",
           "arn:aws:s3:::elasticbeanstalk-*/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:CreateBucket",
+          "s3:DeleteBucket",
+          "s3:ListBucket",
+          "s3:GetBucketLocation",
+          "s3:GetBucketPolicy",
+          "s3:PutBucketPolicy",
+          "s3:DeleteBucketPolicy"
+        ]
+        Resource = [
+          "arn:aws:s3:::elasticbeanstalk-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
         ]
       }
     ]
