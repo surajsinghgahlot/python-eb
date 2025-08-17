@@ -309,6 +309,41 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
           "cloudformation:ValidateTemplate"
         ]
         Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ec2:DescribeImages",
+          "ec2:DescribeInstances",
+          "ec2:DescribeInstanceStatus",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVpcs",
+          "ec2:DescribeAvailabilityZones",
+          "ec2:DescribeRegions",
+          "ec2:DescribeKeyPairs",
+          "ec2:DescribeTags",
+          "ec2:DescribeVolumes",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeLaunchTemplates",
+          "ec2:DescribeLaunchTemplateVersions"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObjectAcl",
+          "s3:PutObjectAcl",
+          "s3:GetBucketAcl",
+          "s3:PutBucketAcl"
+        ]
+        Resource = [
+          "arn:aws:s3:::elasticbeanstalk-*",
+          "arn:aws:s3:::elasticbeanstalk-*/*",
+          "arn:aws:s3:::*-pipeline-artifacts",
+          "arn:aws:s3:::*-pipeline-artifacts/*"
+        ]
       }
     ]
   })
