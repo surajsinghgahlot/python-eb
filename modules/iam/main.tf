@@ -335,6 +335,32 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:DescribeLaunchConfigurations",
+          "autoscaling:DescribeScalingActivities",
+          "autoscaling:DescribeScalingPolicies",
+          "autoscaling:DescribeScheduledActions",
+          "autoscaling:DescribeTags",
+          "autoscaling:DescribeLoadBalancers",
+          "autoscaling:DescribeLoadBalancerTargetGroups",
+          "autoscaling:DescribeWarmPool",
+          "autoscaling:DescribeInstanceRefreshes",
+          "autoscaling:SuspendProcesses",
+          "autoscaling:ResumeProcesses",
+          "autoscaling:UpdateAutoScalingGroup",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "autoscaling:AttachInstances",
+          "autoscaling:DetachInstances",
+          "autoscaling:EnterStandby",
+          "autoscaling:ExitStandby"
+        ]
+        Resource = "*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "s3:GetObjectAcl",
           "s3:PutObjectAcl",
           "s3:GetBucketAcl",
