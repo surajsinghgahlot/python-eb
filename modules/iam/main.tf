@@ -276,6 +276,39 @@ resource "aws_iam_role_policy" "codepipeline_service_role_policy" {
         Resource = [
           "arn:aws:s3:::elasticbeanstalk-${data.aws_region.current.name}-${data.aws_caller_identity.current.account_id}"
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudformation:DescribeStacks",
+          "cloudformation:ListStacks",
+          "cloudformation:GetTemplate",
+          "cloudformation:GetTemplateSummary",
+          "cloudformation:DescribeStackEvents",
+          "cloudformation:DescribeStackResource",
+          "cloudformation:DescribeStackResources",
+          "cloudformation:ListStackResources",
+          "cloudformation:ValidateTemplate"
+        ]
+        Resource = [
+          "arn:aws:cloudformation:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:stack/awseb-*",
+          "arn:aws:cloudformation:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:stack/awseb-*/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "cloudformation:DescribeStacks",
+          "cloudformation:ListStacks",
+          "cloudformation:GetTemplate",
+          "cloudformation:GetTemplateSummary",
+          "cloudformation:DescribeStackEvents",
+          "cloudformation:DescribeStackResource",
+          "cloudformation:DescribeStackResources",
+          "cloudformation:ListStackResources",
+          "cloudformation:ValidateTemplate"
+        ]
+        Resource = "*"
       }
     ]
   })
