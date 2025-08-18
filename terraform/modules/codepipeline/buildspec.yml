@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Zipping Node.js application from code directory..."
+      - cd code
+      - zip -r ../application.zip *
+      - cd ..
+artifacts:
+  files:
+    - application.zip
+  discard-paths: no
