@@ -7,6 +7,7 @@ module "vpc" {
   availability_zones = var.availability_zones
   public_subnets     = var.public_subnet_cidrs
   private_subnets    = var.private_subnet_cidrs
+  single_nat_gateway = true
 }
 
 # IAM Module
