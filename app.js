@@ -33,7 +33,7 @@ async function getSecretValue(secretArn, key) {
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.status(200).send('healthy');
+  res.status(200).send('healthy wealthy');
 });
 
 // Pipeline test endpoint
