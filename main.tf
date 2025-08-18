@@ -32,6 +32,7 @@ module "elastic_beanstalk" {
   private_subnets      = module.vpc.private_subnets
   public_subnets       = module.vpc.public_subnets
   key_pair_name        = var.key_pair_name
+  secret_arn           = var.secret_arn
   iam_instance_profile = module.iam.beanstalk_instance_profile_name
   iam_service_role     = module.iam.beanstalk_service_role_name
 

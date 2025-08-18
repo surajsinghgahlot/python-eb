@@ -24,7 +24,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "SECRET_ARN"
-    value     = "arn:aws:secretsmanager:ap-south-1:221082209503:secret:beanstalk-nh1l14"
+    value     = var.secret_arn
   }
 
   setting {

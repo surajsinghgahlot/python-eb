@@ -18,6 +18,11 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "secret_arn" {
+  description = "AWS secret manager arn"
+  type        = string
+}
+
 variable "availability_zones" {
   description = "Availability zones"
   type        = list(string)

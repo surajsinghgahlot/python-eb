@@ -13,6 +13,11 @@ variable "aws_region" {
   type        = string
 }
 
+variable "secret_arn" {
+  description = "AWS secret manager arn"
+  type        = string
+}
+
 variable "solution_stack_name" {
   description = "Elastic Beanstalk solution stack name"
   type        = string
