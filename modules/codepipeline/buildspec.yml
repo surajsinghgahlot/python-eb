@@ -3,10 +3,8 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo "Installing Node.js dependencies..."
-      - npm install
       - echo "Zipping Node.js application..."
-      - zip -r application.zip app.js package.json package-lock.json node_modules
+      - zip -r application.zip app.js package.json
 artifacts:
   files:
     - application.zip
