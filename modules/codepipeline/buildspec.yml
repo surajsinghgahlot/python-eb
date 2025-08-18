@@ -1,10 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      nodejs: 18
-
   build:
     commands:
       - echo "Installing Node.js dependencies..."
