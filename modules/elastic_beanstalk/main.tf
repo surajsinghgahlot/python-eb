@@ -3,6 +3,10 @@ resource "aws_elastic_beanstalk_application" "app" {
   name        = var.application_name
   description = "Elastic Beanstalk application for ${var.application_name}"
 
+  lifecycle {
+    ignore_changes = [tags]
+  }
+
   tags = {
     Name        = var.application_name
     Environment = var.environment
@@ -152,7 +156,13 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "20"
   }
 
-
+  lifecycle {
+    ignore_changes = [
+      version_label,
+      tags,
+      tags_all
+    ]
+  }
 
   # Optional EC2 key pair
   dynamic "setting" {

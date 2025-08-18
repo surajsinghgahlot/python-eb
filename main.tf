@@ -34,6 +34,10 @@ module "elastic_beanstalk" {
   key_pair_name        = var.key_pair_name
   iam_instance_profile = module.iam.beanstalk_instance_profile_name
   iam_service_role     = module.iam.beanstalk_service_role_name
+
+  depends_on = [ 
+    module.vpc,
+    module.iam ]
 }
 
 # CodePipeline Module
@@ -50,4 +54,8 @@ module "codepipeline" {
   codepipeline_service_role_arn      = module.iam.codepipeline_service_role_arn
   elastic_beanstalk_application_name = module.elastic_beanstalk.application_name
   elastic_beanstalk_environment_name = module.elastic_beanstalk.environment_name
+
+  depends_on = [ 
+    module.elastic_beanstalk,
+    module.iam ]
 }

@@ -32,6 +32,6 @@ resource "aws_elastic_beanstalk_application_version" "app_version" {
   application = aws_elastic_beanstalk_application.app.name
   bucket      = aws_s3_object.app_zip.bucket
   key         = aws_s3_object.app_zip.key
-  name        = "version-${timestamp()}"
+  name        = "version1"
   description = "App version"
 }
