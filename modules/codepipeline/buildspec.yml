@@ -10,8 +10,7 @@ phases:
       - echo "Installing Node.js dependencies..."
       - npm install
       - echo "Zipping Node.js application..."
-      - zip -r application.zip . -x "*.git*" "node_modules/.cache/*" "*.git/*"
-
+      - zip -r application.zip app.js package.json package-lock.json node_modules
 artifacts:
   files:
     - application.zip
