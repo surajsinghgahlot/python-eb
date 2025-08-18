@@ -36,16 +36,6 @@ app.get('/health', (req, res) => {
   res.status(200).send('healthy wealthy');
 });
 
-// Pipeline test endpoint
-app.get('/pipeline-test', (req, res) => {
-  res.json({
-    message: 'CI/CD Pipeline is working!',
-    timestamp: new Date().toISOString(),
-    version: '1.0.1',
-    status: 'deployed'
-  });
-});
-
 // Main endpoint to fetch secrets
 app.get('/', async (req, res) => {
   const key = req.query.key;
