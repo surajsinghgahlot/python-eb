@@ -1,5 +1,5 @@
 const express = require('express');
-const { sendEmail } = require('./mailModule');
+const { sendEmail } = require('../mailModule');
 const app = express();
 const port = process.env.PORT || 8081;
 

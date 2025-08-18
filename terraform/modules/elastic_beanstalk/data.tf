@@ -8,17 +8,17 @@ data "archive_file" "app_zip" {
   output_path = "${path.module}/application.zip"
 
   source {
-    content  = file("${path.root}/../code/app.js")
+    content  = file("${path.root}/../app.js")
     filename = "app.js"
   }
 
   source {
-    content  = file("${path.root}/../code/package.json")
+    content  = file("${path.root}/../package.json")
     filename = "package.json"
   }
 
   source {
-    content  = file("${path.root}/../code/mailModule.js")
+    content  = file("${path.root}/../mailModule.js")
     filename = "mailModule.js"
   }
 }
