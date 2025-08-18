@@ -6,6 +6,7 @@ resource "aws_s3_bucket" "artifact_store" {
     Name        = "${var.environment}-${var.application_name}-pipeline-artifacts"
     Environment = var.environment
   }
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_versioning" "artifact_store" {
