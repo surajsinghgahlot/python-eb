@@ -29,6 +29,7 @@ module "elastic_beanstalk" {
   min_size             = var.min_size
   max_size             = var.max_size
   vpc_id               = module.vpc.vpc_id
+  app_port             = var.app_port
   private_subnets      = module.vpc.private_subnets
   public_subnets       = module.vpc.public_subnets
   key_pair_name        = var.key_pair_name

@@ -8,7 +8,7 @@ app.use(express.json());
 // Load environment variables
 const SECRET_ARN = process.env.SECRET_ARN;
 const REGION_NAME = process.env.AWS_REGION;
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8081;
 
 // Configure AWS
 AWS.config.update({ region: REGION_NAME });

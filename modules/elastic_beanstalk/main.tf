@@ -36,7 +36,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "PORT"
-    value     = "80"
+    value     = var.app_port
   }
 
   setting {
@@ -134,7 +134,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "Port"
-    value     = "80"
+    value     = var.app_port
   }
 
   setting {

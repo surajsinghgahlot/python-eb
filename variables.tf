@@ -3,6 +3,11 @@ variable "aws_region" {
   type        = string
 }
 
+variable "app_port" {
+  description = "Application port for the Elastic Beanstalk environment"
+  type        = string
+}
+
 variable "environment" {
   description = "Environment name"
   type        = string

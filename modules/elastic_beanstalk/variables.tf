@@ -18,6 +18,11 @@ variable "secret_arn" {
   type        = string
 }
 
+variable "app_port" {
+  description = "Application port for the Elastic Beanstalk environment"
+  type        = string
+}
+
 variable "solution_stack_name" {
   description = "Elastic Beanstalk solution stack name"
   type        = string
