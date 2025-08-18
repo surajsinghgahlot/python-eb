@@ -1,10 +1,18 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+
   build:
     commands:
-      - echo "Zipping app.py and requirements.txt..."
-      - zip application.zip app.py requirements.txt
+      - echo "Installing Node.js dependencies..."
+      - npm ci
+      - echo "Running build (if applicable)..."
+      - npm run build || echo "No build script found, skipping..."
+      - echo "Zipping Node.js application..."
+      - zip -r application.zip . -x "*.git*" "node_modules/.cache/*" "*.git/*"
 
 artifacts:
   files:

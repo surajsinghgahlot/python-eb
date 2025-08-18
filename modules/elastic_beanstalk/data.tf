@@ -8,13 +8,13 @@ data "archive_file" "app_zip" {
   output_path = "${path.module}/application.zip"
 
   source {
-    content  = file("${path.root}/app.py")
-    filename = "app.py"
+    content  = file("${path.root}/app.js")
+    filename = "app.js"
   }
 
   source {
-    content  = file("${path.root}/requirements.txt")
-    filename = "requirements.txt"
+    content  = file("${path.root}/package.json")
+    filename = "package.json"
   }
 }
 

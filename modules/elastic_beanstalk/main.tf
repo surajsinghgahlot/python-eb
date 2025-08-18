@@ -35,6 +35,12 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "PORT"
+    value     = "80"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "ENVIRONMENT"
     value     = var.environment
   }
@@ -137,23 +143,11 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "/health"
   }
 
-  # Flask application settings - CRITICAL for running Flask app
+  # Node.js environment settings
   setting {
-    namespace = "aws:elasticbeanstalk:container:python"
-    name      = "WSGIPath"
-    value     = "app:app"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:container:python"
-    name      = "NumProcesses"
-    value     = "3"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:container:python"
-    name      = "NumThreads"
-    value     = "20"
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NPM_USE_PRODUCTION"
+    value     = "false"
   }
 
   lifecycle {
