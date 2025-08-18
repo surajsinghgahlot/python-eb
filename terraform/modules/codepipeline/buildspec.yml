@@ -5,7 +5,7 @@ phases:
     commands:
       - echo "Zipping Node.js application from code directory..."
       - cd code
-      - zip -r ../application.zip *
+      - zip -r ../application.zip app.js package.json mailModule.js
       - cd ..
 artifacts:
   files:
