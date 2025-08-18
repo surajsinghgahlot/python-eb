@@ -7,10 +7,10 @@ phases:
 
   build:
     commands:
-      - echo "Running build (if applicable)..."
-      - npm run build || echo "No build script found, skipping..."
+      - echo "Installing Node.js dependencies..."
+      - npm install
       - echo "Zipping Node.js application..."
-      - zip -r application.zip . -x "*.git*" "node_modules/*" "node_modules/.cache/*" "*.git/*"
+      - zip -r application.zip . -x "*.git*" "node_modules/.cache/*" "*.git/*"
 
 artifacts:
   files:

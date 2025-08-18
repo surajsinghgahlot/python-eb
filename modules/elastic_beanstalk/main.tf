@@ -150,6 +150,20 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "false"
   }
 
+  # Node.js startup command
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "NODE_ENV"
+    value     = "production"
+  }
+
+  # Node.js container settings
+  setting {
+    namespace = "aws:elasticbeanstalk:container:nodejs"
+    name      = "NodeCommand"
+    value     = "npm start"
+  }
+
   lifecycle {
     ignore_changes = [
       version_label,
