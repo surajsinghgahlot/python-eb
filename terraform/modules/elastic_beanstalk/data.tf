@@ -6,21 +6,8 @@ data "aws_caller_identity" "current" {}
 data "archive_file" "app_zip" {
   type        = "zip"
   output_path = "${path.module}/application.zip"
-
-  source {
-    content  = file("${path.root}/../app.js")
-    filename = "app.js"
-  }
-
-  source {
-    content  = file("${path.root}/../package.json")
-    filename = "package.json"
-  }
-
-  source {
-    content  = file("${path.root}/../mailModule.js")
-    filename = "mailModule.js"
-  }
+  source_dir  = "${path.root}/.."
+  excludes    = ["terraform", ".git", ".DS_Store", ".gitignore", "cred.md"]
 }
 
 
