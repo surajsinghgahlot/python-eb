@@ -7,8 +7,6 @@ phases:
 
   build:
     commands:
-      - echo "Installing Node.js dependencies..."
-      - npm ci
       - echo "Running build (if applicable)..."
       - npm run build || echo "No build script found, skipping..."
       - echo "Zipping Node.js application..."
