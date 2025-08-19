@@ -81,8 +81,8 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   # Load Balancer Security Groups
   setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "LoadBalancerSecurityGroups"
+    namespace = "aws:elbv2:loadbalancer"
+    name      = "SecurityGroups"
     value     = var.load_balancer_security_group_id
   }
 

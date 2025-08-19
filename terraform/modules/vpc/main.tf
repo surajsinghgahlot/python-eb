@@ -50,7 +50,7 @@ resource "aws_subnet" "private" {
 
 # Security Group for Load Balancer
 resource "aws_security_group" "load_balancer" {
-  name_prefix = "${var.environment}-load-balancer-"
+  name = "${var.environment}-load-balancer"
   vpc_id      = aws_vpc.main.id
 
   # Dynamic inbound rules for specified ports
@@ -82,7 +82,7 @@ resource "aws_security_group" "load_balancer" {
 
 # Security Group for Elastic Beanstalk
 resource "aws_security_group" "elastic_beanstalk" {
-  name_prefix = "${var.environment}-elastic-beanstalk-"
+  name = "${var.environment}-elastic-beanstalk"
   vpc_id      = aws_vpc.main.id
 
   # Allow inbound traffic from Load Balancer only
