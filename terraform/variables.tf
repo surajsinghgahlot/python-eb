@@ -8,6 +8,12 @@ variable "app_port" {
   type        = string
 }
 
+variable "inbound_ports" {
+  description = "List of inbound ports to allow on load balancer"
+  type        = list(number)
+  default     = [80, 443]
+}
+
 variable "environment" {
   description = "Environment name"
   type        = string

@@ -7,6 +7,7 @@ module "vpc" {
   availability_zones = var.availability_zones
   public_subnets     = var.public_subnet_cidrs
   private_subnets    = var.private_subnet_cidrs
+  inbound_ports      = var.inbound_ports
 }
 
 # IAM Module
@@ -36,6 +37,8 @@ module "elastic_beanstalk" {
   secret_arn           = var.secret_arn
   iam_instance_profile = module.iam.beanstalk_instance_profile_name
   iam_service_role     = module.iam.beanstalk_service_role_name
+  elastic_beanstalk_security_group_id = module.vpc.elastic_beanstalk_security_group_id
+  load_balancer_security_group_id     = module.vpc.load_balancer_security_group_id
 
   depends_on = [ 
     module.vpc,

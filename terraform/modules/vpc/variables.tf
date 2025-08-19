@@ -23,6 +23,11 @@ variable "public_subnets" {
   type        = list(string)
 }
 
+variable "inbound_ports" {
+  description = "List of inbound ports to allow on load balancer"
+  type        = list(number)
+}
+
 variable "enable_nat_gateway" {
   description = "Enable NAT Gateway"
   type        = bool

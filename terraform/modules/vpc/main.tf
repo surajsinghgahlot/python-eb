@@ -48,6 +48,69 @@ resource "aws_subnet" "private" {
   }
 }
 
+# Security Group for Load Balancer
+resource "aws_security_group" "load_balancer" {
+  name_prefix = "${var.environment}-load-balancer-"
+  vpc_id      = aws_vpc.main.id
+
+  # Dynamic inbound rules for specified ports
+  dynamic "ingress" {
+    for_each = var.inbound_ports
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+      description = "Inbound traffic on port ${ingress.value}"
+    }
+  }
+
+  # Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "All outbound traffic"
+  }
+
+  tags = {
+    Name        = "${var.environment}-load-balancer-sg"
+    Environment = var.environment
+  }
+}
+
+# Security Group for Elastic Beanstalk
+resource "aws_security_group" "elastic_beanstalk" {
+  name_prefix = "${var.environment}-elastic-beanstalk-"
+  vpc_id      = aws_vpc.main.id
+
+  # Allow inbound traffic from Load Balancer only
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol        = "tcp"
+    security_groups = [aws_security_group.load_balancer.id]
+    description     = "Inbound traffic from Load Balancer"
+  }
+
+  # Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "All outbound traffic"
+  }
+
+  tags = {
+    Name        = "${var.environment}-elastic-beanstalk-sg"
+    Environment = var.environment
+  }
+
+  depends_on = [ aws_security_group.load_balancer ]
+}
+
 # Elastic IPs for NAT Gateways
 resource "aws_eip" "nat" {
   count = var.enable_nat_gateway ? (var.single_nat_gateway ? 1 : length(var.private_subnets)) : 0

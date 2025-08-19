@@ -47,3 +47,13 @@ output "private_route_table_ids" {
   description = "Private route table IDs"
   value       = aws_route_table.private[*].id
 }
+
+output "elastic_beanstalk_security_group_id" {
+  description = "Security Group ID for Elastic Beanstalk instances"
+  value       = aws_security_group.elastic_beanstalk.id
+}
+
+output "load_balancer_security_group_id" {
+  description = "Security Group ID for Load Balancer"
+  value       = aws_security_group.load_balancer.id
+}
