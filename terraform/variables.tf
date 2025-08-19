@@ -95,3 +95,34 @@ variable "github_oauth_token" {
   description = "GitHub OAuth token for CodePipeline"
   type        = string
 }
+
+# Email configuration variables
+variable "email_smtp_host" {
+  description = "SMTP host for email sending"
+  type        = string
+}
+
+variable "mail_service" {
+  description = "Mail service provider"
+  type        = string
+}
+
+variable "email_smtp_port" {
+  description = "SMTP port for email sending"
+  type        = string
+}
+
+variable "email_smtp_username" {
+  description = "SMTP username for email sending"
+  type        = string
+}
+
+variable "email_smtp_password" {
+  description = "SMTP password for email sending"
+  type        = string
+}
+
+variable "email_smtp_secure" {
+  description = "SMTP secure connection (true for 465, false for other ports)"
+  type        = string
+}

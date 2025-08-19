@@ -83,3 +83,40 @@ variable "load_balancer_security_group_id" {
   description = "Security Group ID for Load Balancer"
   type        = string
 }
+
+# Email configuration variables
+variable "email_smtp_host" {
+  description = "SMTP host for email sending"
+  type        = string
+  default     = "smtpout.secureserver.net"
+}
+
+variable "mail_service" {
+  description = "Mail service provider"
+  type        = string
+  default     = "gmail"
+}
+
+variable "email_smtp_port" {
+  description = "SMTP port for email sending"
+  type        = string
+  default     = "465"
+}
+
+variable "email_smtp_username" {
+  description = "SMTP username for email sending"
+  type        = string
+  default     = "info@bzloyalty.com"
+}
+
+variable "email_smtp_password" {
+  description = "SMTP password for email sending"
+  type        = string
+  default     = "Vision@12369"
+}
+
+variable "email_smtp_secure" {
+  description = "SMTP secure connection (true for 465, false for other ports)"
+  type        = string
+  default     = "true"
+}

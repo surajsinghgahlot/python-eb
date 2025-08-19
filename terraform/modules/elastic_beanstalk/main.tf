@@ -51,6 +51,42 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.application_name
   }
 
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EMAIL_SMTP_HOST"
+    value     = var.email_smtp_host
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "MAIL_SERVICE"
+    value     = var.mail_service
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EMAIL_SMTP_PORT"
+    value     = var.email_smtp_port
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EMAIL_SMTP_USERNAME"
+    value     = var.email_smtp_username
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EMAIL_SMTP_PASSWORD"
+    value     = var.email_smtp_password
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EMAIL_SMTP_SECURE"
+    value     = var.email_smtp_secure
+  }
+
   # Instance profile
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
