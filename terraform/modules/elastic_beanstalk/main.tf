@@ -72,6 +72,20 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.instance_type
   }
 
+  # Security Groups
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = var.elastic_beanstalk_security_group_id
+  }
+
+  # Load Balancer Security Groups
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerSecurityGroups"
+    value     = var.load_balancer_security_group_id
+  }
+
   # ASG scaling
   setting {
     namespace = "aws:autoscaling:asg"

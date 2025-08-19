@@ -73,3 +73,13 @@ variable "iam_service_role" {
   description = "IAM service role name"
   type        = string
 }
+
+variable "elastic_beanstalk_security_group_id" {
+  description = "Security Group ID for Elastic Beanstalk instances"
+  type        = string
+}
+
+variable "load_balancer_security_group_id" {
+  description = "Security Group ID for Load Balancer"
+  type        = string
+}
