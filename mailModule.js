@@ -1,7 +1,4 @@
-import { env } from "process";
-import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-dotenv.config({ path: ".env" });
 
 const {
   EMAIL_SMTP_HOST,
@@ -9,7 +6,7 @@ const {
   EMAIL_SMTP_PASSWORD,
   EMAIL_SMTP_PORT,
   EMAIL_SMTP_SECURE,
-} = env;
+} = process.env;
 
 // -------- Send mail to users --------- //
 
