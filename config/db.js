@@ -8,13 +8,11 @@ if (process.env.NODE_ENV === 'development' || process.env.ENV === 'LOCAL') {
   dotenv.config({ path: "./.env" });
 }
 
-const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD, LIVE_URL_DB, PORT, ENV } = env;
-
 let URL;
-if (ENV === "LOCAL") {
-  URL = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+if (process.env.ENV === "LOCAL") {
+  URL = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
 } else {
-  // URL = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
+  // URL = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
   URL = process.env.LIVE_URL_DB;
 }
 
