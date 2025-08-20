@@ -29,7 +29,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "ENVIRONMENT"
+    name      = "ENV"
     value     = var.environment
   }
 
