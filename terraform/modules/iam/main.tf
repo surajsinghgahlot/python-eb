@@ -91,6 +91,53 @@ resource "aws_iam_role_policy" "beanstalk_instance_secrets_policy" {
 }
 
 # =========================
+# CloudWatch Logs Access for Beanstalk Instances
+# =========================
+resource "aws_iam_role_policy" "beanstalk_instance_cloudwatch_policy" {
+  name = "${var.environment}-beanstalk-instance-cloudwatch-policy"
+  role = aws_iam_role.beanstalk_instance_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogGroups",
+          "logs:DescribeLogStreams"
+        ],
+        Resource = [
+          "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*",
+          "arn:aws:logs:*:*:log-group:/aws/elasticbeanstalk/*:log-stream:*"
+        ]
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "cloudwatch:PutMetricData",
+          "cloudwatch:GetMetricStatistics",
+          "cloudwatch:ListMetrics"
+        ],
+        Resource = "*"
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "xray:PutTraceSegments",
+          "xray:PutTelemetryRecords",
+          "xray:GetSamplingRules",
+          "xray:GetSamplingTargets"
+        ],
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# =========================
 # Instance Profile
 # =========================
 resource "aws_iam_instance_profile" "beanstalk_instance_profile" {

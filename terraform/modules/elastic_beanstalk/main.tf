@@ -277,6 +277,57 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "/health"
   }
 
+  # CloudWatch Logs configuration
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "false"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "RetentionInDays"
+    value     = "7"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "LogToCloudWatchLogs"
+    value     = "true"
+  }
+
+  # Enhanced monitoring and health reporting
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "EnhancedHealthReporting"
+    value     = "enhanced"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "ManagedActionsEnabled"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "PreferredStartTime"
+    value     = "Sun:02:00"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "ServiceRole"
+    value     = var.iam_service_role
+  }
+
+
   # Rolling deployment configuration
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"

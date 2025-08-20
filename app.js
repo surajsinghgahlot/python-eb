@@ -27,12 +27,7 @@ app.use(morgan('dev'));
 // Additional simple health check for load balancer
 app.get('/health', (req, res) => {
   try {
-    res.status(200).json({
-      status: 'OK',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      port: process.env.PORT || 8081
-    });
+    res.status(200).send('Health check successful');
   } catch (error) {
     res.status(500).send('Health check failed');
   }
