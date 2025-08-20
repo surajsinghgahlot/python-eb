@@ -300,7 +300,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "RollingUpdateType"
-    value     = "Immutable"
+    value     = "Health"
   }
 
   setting {
