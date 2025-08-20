@@ -355,12 +355,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
-    name      = "RollingUpdateTimeout"
-    value     = "PT30M"
-  }
-
-  setting {
-    namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "PauseTime"
     value     = "PT0S"
   }
