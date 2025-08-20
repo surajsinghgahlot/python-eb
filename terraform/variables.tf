@@ -1,8 +1,3 @@
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-}
-
 variable "app_port" {
   description = "Application port for the Elastic Beanstalk environment"
   type        = string
@@ -26,11 +21,6 @@ variable "application_name" {
 
 variable "vpc_cidr" {
   description = "CIDR block for VPC"
-  type        = string
-}
-
-variable "secret_arn" {
-  description = "AWS secret manager arn"
   type        = string
 }
 
@@ -124,5 +114,70 @@ variable "email_smtp_password" {
 
 variable "email_smtp_secure" {
   description = "SMTP secure connection (true for 465, false for other ports)"
+  type        = string
+}
+
+variable "db_name" {
+  description = "Database name"
+  type        = string
+}
+
+variable "db_host" {
+  description = "Database host"
+  type        = string
+}
+
+variable "db_port" {
+  description = "Database port"
+  type        = string
+}
+
+variable "access_token_secret" {
+  description = "JWT access token secret"
+  type        = string
+}
+
+variable "access_token_timeout_duration" {
+  description = "JWT access token timeout duration"
+  type        = string
+}
+
+variable "refresh_token_secret" {
+  description = "JWT refresh token secret"
+  type        = string
+}
+
+variable "refresh_token_timeout_duration" {
+  description = "JWT refresh token timeout duration"
+  type        = string
+}
+
+variable "vendor_secret" {
+  description = "Vendor secret key"
+  type        = string
+}
+
+variable "crypto_secret_key" {
+  description = "Crypto secret key"
+  type        = string
+}
+
+variable "bucket_s3_zone" {
+  description = "S3 bucket zone"
+  type        = string
+}
+
+variable "bucket_secret_access_key" {
+  description = "S3 bucket secret access key"
+  type        = string
+}
+
+variable "bucket_access_key_id" {
+  description = "S3 bucket access key ID"
+  type        = string
+}
+
+variable "s3_image_bucket" {
+  description = "S3 image bucket name"
   type        = string
 }

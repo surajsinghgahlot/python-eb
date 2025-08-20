@@ -22,7 +22,6 @@ module "iam" {
 module "elastic_beanstalk" {
   source = "./modules/elastic_beanstalk"
   
-  aws_region          = var.aws_region
   environment          = var.environment
   application_name     = var.application_name
   solution_stack_name  = var.solution_stack_name
@@ -34,7 +33,6 @@ module "elastic_beanstalk" {
   private_subnets      = module.vpc.private_subnets
   public_subnets       = module.vpc.public_subnets
   key_pair_name        = var.key_pair_name
-  secret_arn           = var.secret_arn
   iam_instance_profile = module.iam.beanstalk_instance_profile_name
   iam_service_role     = module.iam.beanstalk_service_role_name
   elastic_beanstalk_security_group_id = module.vpc.elastic_beanstalk_security_group_id
@@ -46,6 +44,19 @@ module "elastic_beanstalk" {
   email_smtp_username = var.email_smtp_username
   email_smtp_password = var.email_smtp_password
   email_smtp_secure   = var.email_smtp_secure
+  db_name  = var.db_name
+  db_host  = var.db_host
+  db_port  = var.db_port
+  access_token_secret           = var.access_token_secret
+  access_token_timeout_duration = var.access_token_timeout_duration
+  refresh_token_secret          = var.refresh_token_secret
+  refresh_token_timeout_duration = var.refresh_token_timeout_duration
+  vendor_secret                 = var.vendor_secret
+  crypto_secret_key             = var.crypto_secret_key
+  bucket_s3_zone           = var.bucket_s3_zone
+  bucket_secret_access_key = var.bucket_secret_access_key
+  bucket_access_key_id     = var.bucket_access_key_id
+  s3_image_bucket          = var.s3_image_bucket
 
   depends_on = [ 
     module.vpc,

@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 import { env } from "process";
-import dotenv from "dotenv";
 import { seedData, seedAccess, seedPoints, seedUserFields } from "./seeder.js";
-dotenv.config({ path: "./.env" });
+
+// Environment variables are now provided by AWS Elastic Beanstalk
+// Only load dotenv for local development
+if (process.env.NODE_ENV === 'development' || process.env.ENV === 'LOCAL') {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: "./.env" });
+}
 
 const { DB_HOST, DB_PORT, DB_NAME, DB_USERNAME, DB_PASSWORD, LIVE_URL,PORT, ENV } = env;
 

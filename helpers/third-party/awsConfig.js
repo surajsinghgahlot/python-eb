@@ -1,9 +1,13 @@
 import aws from 'aws-sdk';
 import { env } from 'process';
-import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: './.env' });
+// Environment variables are now provided by AWS Elastic Beanstalk
+// Only load dotenv for local development
+if (process.env.NODE_ENV === 'development' || process.env.ENV === 'LOCAL') {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: './.env' });
+}
 
 
 aws.config.update({

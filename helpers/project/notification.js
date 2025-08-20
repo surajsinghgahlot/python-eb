@@ -1,7 +1,11 @@
 import { env } from "process";
-import dotenv from "dotenv";
 
-dotenv.config({ path: "./.env" });
+// Environment variables are now provided by AWS Elastic Beanstalk
+// Only load dotenv for local development
+if (process.env.NODE_ENV === 'development' || process.env.ENV === 'LOCAL') {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: "./.env" });
+}
 
 const { SERVER_KEY } = env;
 // const FCM = require('fcm-node')
