@@ -120,11 +120,6 @@ variable "db_port" {
   type        = string
 }
 
-variable "live_url" {
-  description = "Live database URL"
-  type        = string
-}
-
 variable "access_token_secret" {
   description = "JWT access token secret"
   type        = string

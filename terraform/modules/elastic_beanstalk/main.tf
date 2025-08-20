@@ -75,7 +75,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.email_smtp_secure
   }
 
-  # Database configuration
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DB_NAME"
@@ -84,7 +83,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_HOST"
+    name      = "LIVE_URL_DB"
     value     = var.db_host
   }
 
@@ -94,13 +93,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.db_port
   }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "LIVE_URL"
-    value     = var.live_url
-  }
-
-  # JWT configuration
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "ACCESS_TOKEN_SECRET"
@@ -137,7 +129,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.crypto_secret_key
   }
 
-  # AWS S3 configuration
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "BUCKET_S3_ZONE"
