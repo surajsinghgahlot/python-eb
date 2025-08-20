@@ -8,6 +8,8 @@ module "vpc" {
   public_subnets     = var.public_subnet_cidrs
   private_subnets    = var.private_subnet_cidrs
   inbound_ports      = var.inbound_ports
+  enable_nat_gateway = true
+  single_nat_gateway = true
 }
 
 # IAM Module
@@ -63,21 +65,21 @@ module "elastic_beanstalk" {
 }
 
 # CodePipeline Module
-module "codepipeline" {
-  source = "./modules/codepipeline"
+# module "codepipeline" {
+#   source = "./modules/codepipeline"
   
-  environment                        = var.environment
-  application_name                   = var.application_name
-  github_owner                       = var.github_owner
-  github_repository                  = var.github_repository
-  github_branch                      = var.github_branch
-  github_oauth_token                 = var.github_oauth_token
-  codebuild_service_role_arn         = module.iam.codebuild_service_role_arn
-  codepipeline_service_role_arn      = module.iam.codepipeline_service_role_arn
-  elastic_beanstalk_application_name = module.elastic_beanstalk.application_name
-  elastic_beanstalk_environment_name = module.elastic_beanstalk.environment_name
+#   environment                        = var.environment
+#   application_name                   = var.application_name
+#   github_owner                       = var.github_owner
+#   github_repository                  = var.github_repository
+#   github_branch                      = var.github_branch
+#   github_oauth_token                 = var.github_oauth_token
+#   codebuild_service_role_arn         = module.iam.codebuild_service_role_arn
+#   codepipeline_service_role_arn      = module.iam.codepipeline_service_role_arn
+#   elastic_beanstalk_application_name = module.elastic_beanstalk.application_name
+#   elastic_beanstalk_environment_name = module.elastic_beanstalk.environment_name
 
-  depends_on = [ 
-    module.elastic_beanstalk,
-    module.iam ]
-}
+#   depends_on = [ 
+#     module.elastic_beanstalk,
+#     module.iam ]
+# }
