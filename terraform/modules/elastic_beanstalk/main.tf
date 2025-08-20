@@ -148,28 +148,24 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = var.iam_instance_profile
   }
 
-  # Service role
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "ServiceRole"
     value     = var.iam_service_role
   }
 
-  # Instance type
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "InstanceType"
     value     = var.instance_type
   }
 
-  # Security Groups
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SecurityGroups"
     value     = var.elastic_beanstalk_security_group_id
   }
 
-  # Load Balancer Security Groups
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
@@ -221,14 +217,12 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "application"
   }
 
-  # Environment type
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
     value     = "LoadBalanced"
   }
 
-  # Health check settings
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "HealthCheckPath"
@@ -296,38 +290,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "7"
   }
 
-  setting {
-    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
-    name      = "LogToCloudWatchLogs"
-    value     = "true"
-  }
-
-  # Enhanced monitoring and health reporting
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "EnhancedHealthReporting"
-    value     = "enhanced"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "ManagedActionsEnabled"
-    value     = "true"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "PreferredStartTime"
-    value     = "Sun:02:00"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:environment"
-    name      = "ServiceRole"
-    value     = var.iam_service_role
-  }
-
-
   # Rolling deployment configuration
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
@@ -366,7 +328,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "false"
   }
 
-  # Node.js startup command
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "NODE_ENV"
