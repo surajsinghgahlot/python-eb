@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import routes from './routes/index.routes.js';
 import cookieParser from 'cookie-parser';
 import { WhiteList } from './schema/index.js';
@@ -23,12 +24,18 @@ console.log("Static path for uploads:", path.join(dirname, "uploads"));
 
 app.use(morgan('dev'));
 
-app.get('/v1/api/health-status', (req, res) => {
-  res.json({
-    code : 200,
-    status : true,
-    message : "System is Healthy"
-  });
+// Additional simple health check for load balancer
+app.get('/health', (req, res) => {
+  try {
+    res.status(200).json({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      port: process.env.PORT || 8081
+    });
+  } catch (error) {
+    res.status(500).send('Health check failed');
+  }
 });
 
 const whiteList = async () => {
