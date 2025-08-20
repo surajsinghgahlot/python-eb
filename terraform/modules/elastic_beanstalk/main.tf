@@ -23,18 +23,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
   # Environment variables
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "SECRET_ARN"
-    value     = var.secret_arn
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "AWS_REGION"
-    value     = var.aws_region
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "PORT"
     value     = var.app_port
   }
@@ -85,6 +73,93 @@ resource "aws_elastic_beanstalk_environment" "env" {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "EMAIL_SMTP_SECURE"
     value     = var.email_smtp_secure
+  }
+
+  # Database configuration
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_NAME"
+    value     = var.db_name
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_HOST"
+    value     = var.db_host
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_PORT"
+    value     = var.db_port
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "LIVE_URL"
+    value     = var.live_url
+  }
+
+  # JWT configuration
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "ACCESS_TOKEN_SECRET"
+    value     = var.access_token_secret
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "ACCESS_TOKEN_TIMEOUT_DURATION"
+    value     = var.access_token_timeout_duration
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "REFRESH_TOKEN_SECRET"
+    value     = var.refresh_token_secret
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "REFRESH_TOKEN_TIMEOUT_DURATION"
+    value     = var.refresh_token_timeout_duration
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "VENDOR_SECRET"
+    value     = var.vendor_secret
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "CRYPTO_SECRET_KEY"
+    value     = var.crypto_secret_key
+  }
+
+  # AWS S3 configuration
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "BUCKET_S3_ZONE"
+    value     = var.bucket_s3_zone
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "BUCKET_SECRET_ACCESS_KEY"
+    value     = var.bucket_secret_access_key
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "BUCKET_ACCESS_KEY_ID"
+    value     = var.bucket_access_key_id
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "S3_IMAGE_BUCKET"
+    value     = var.s3_image_bucket
   }
 
   # Instance profile

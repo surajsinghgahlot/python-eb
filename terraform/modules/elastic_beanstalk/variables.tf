@@ -8,16 +8,6 @@ variable "application_name" {
   type        = string
 }
 
-variable "aws_region" {
-  description = "AWS region for the Elastic Beanstalk application"
-  type        = string
-}
-
-variable "secret_arn" {
-  description = "AWS secret manager arn"
-  type        = string
-}
-
 variable "app_port" {
   description = "Application port for the Elastic Beanstalk environment"
   type        = string
@@ -84,39 +74,103 @@ variable "load_balancer_security_group_id" {
   type        = string
 }
 
-# Email configuration variables
+# Env configuration variables
 variable "email_smtp_host" {
   description = "SMTP host for email sending"
   type        = string
-  default     = "smtpout.secureserver.net"
 }
 
 variable "mail_service" {
   description = "Mail service provider"
   type        = string
-  default     = "gmail"
 }
 
 variable "email_smtp_port" {
   description = "SMTP port for email sending"
   type        = string
-  default     = "465"
 }
 
 variable "email_smtp_username" {
   description = "SMTP username for email sending"
   type        = string
-  default     = "info@bzloyalty.com"
 }
 
 variable "email_smtp_password" {
   description = "SMTP password for email sending"
   type        = string
-  default     = "Vision@12369"
 }
 
 variable "email_smtp_secure" {
   description = "SMTP secure connection (true for 465, false for other ports)"
   type        = string
-  default     = "true"
+}
+
+variable "db_name" {
+  description = "Database name"
+  type        = string
+}
+
+variable "db_host" {
+  description = "Database host"
+  type        = string
+}
+
+variable "db_port" {
+  description = "Database port"
+  type        = string
+}
+
+variable "live_url" {
+  description = "Live database URL"
+  type        = string
+}
+
+variable "access_token_secret" {
+  description = "JWT access token secret"
+  type        = string
+}
+
+variable "access_token_timeout_duration" {
+  description = "JWT access token timeout duration"
+  type        = string
+}
+
+variable "refresh_token_secret" {
+  description = "JWT refresh token secret"
+  type        = string
+}
+
+variable "refresh_token_timeout_duration" {
+  description = "JWT refresh token timeout duration"
+  type        = string
+}
+
+variable "vendor_secret" {
+  description = "Vendor secret key"
+  type        = string
+}
+
+variable "crypto_secret_key" {
+  description = "Crypto secret key"
+  type        = string
+}
+
+variable "bucket_s3_zone" {
+  description = "S3 bucket zone"
+  type        = string
+}
+
+variable "bucket_secret_access_key" {
+  description = "S3 bucket secret access key"
+  type        = string
+}
+
+variable "bucket_access_key_id" {
+  description = "S3 bucket access key ID"
+  type        = string
+}
+
+variable "s3_image_bucket" {
+  description = "S3 image bucket name"
+  type        = string
 }
