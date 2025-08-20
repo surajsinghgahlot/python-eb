@@ -1,5 +1,4 @@
 import aws from 'aws-sdk';
-import { env } from 'process';
 import path from 'path';
 
 // Environment variables are now provided by AWS Elastic Beanstalk
@@ -11,9 +10,9 @@ if (process.env.NODE_ENV === 'development' || process.env.ENV === 'LOCAL') {
 
 
 aws.config.update({
-  secretAccessKey: env.BUCKET_SECRET_ACCESS_KEY,
-  accessKeyId: env.BUCKET_ACCESS_KEY_ID,
-  region: env.BUCKET_S3_ZONE,
+  secretAccessKey: process.env.BUCKET_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.BUCKET_ACCESS_KEY_ID,
+  region: process.env.BUCKET_S3_ZONE,
 });
 
 
@@ -30,7 +29,7 @@ const uploadToS3Image = async ({ file, platform, folder, brand }) => {
   }
 
   const params = {
-    Bucket: env.S3_IMAGE_BUCKET,
+    Bucket: process.env.S3_IMAGE_BUCKET,
     ACL: 'public-read',
     Key:
       `${bucketData.bucketPath + '/'}` +
@@ -44,9 +43,9 @@ const uploadToS3Image = async ({ file, platform, folder, brand }) => {
 
 const deleteFromS3Image = (imagekey) => {
   let imageUrl = `image/${imagekey}`
-  s3.deleteObject({ Bucket: env.S3_IMAGE_BUCKET, Key: imageUrl }).promise();
+  s3.deleteObject({ Bucket: process.env.S3_IMAGE_BUCKET, Key: imageUrl }).promise();
   return s3
-    .deleteObject({ Bucket: env.S3_IMAGE_BUCKET, Key: imageUrl })
+    .deleteObject({ Bucket: process.env.S3_IMAGE_BUCKET, Key: imageUrl })
     .promise();
 };
 
