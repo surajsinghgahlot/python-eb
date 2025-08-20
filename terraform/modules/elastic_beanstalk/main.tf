@@ -178,7 +178,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "HealthCheckPath"
-    value     = "/health"
+    value     = "/v1/api/health-status"
   }
 
   setting {
@@ -190,7 +190,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:elasticbeanstalk:application"
     name      = "Application Healthcheck URL"
-    value     = "/health"
+    value     = "/v1/api/health-status"
   }
 
   # Node.js environment settings

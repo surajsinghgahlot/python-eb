@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Manage Employees",
+    "permission": ["Add/Edit Employees", "Add/Edit Role" ]
+  },
+  {
+    "name": "Manage Vendor",
+    "permission": ["Add/Edit Vendor", "Add/Edit Brand" ,"VendorPanel" ]
+  },
+  {
+    "name": "Manage Platform",
+    "permission": ["Users", "Location" ]
+  }
+]

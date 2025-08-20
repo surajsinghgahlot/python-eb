@@ -1,31 +1,78 @@
-const express = require('express');
-const { sendEmail } = require('./mailModule');
+import path from 'path';
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import routes from './routes/index.routes.js';
+import cookieParser from 'cookie-parser';
+import { WhiteList } from './schema/index.js';
+// import rateLimit from 'express-rate-limit';
+
 const app = express();
-const port = process.env.PORT || 8081;
+const dirname = path.resolve();
 
-app.use(express.json());
+app.use(cookieParser());
+app.use(express.json({}));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(dirname, "public")));
+app.use(express.static(path.join(dirname, "uploads")));
 
-// email endpoint
-app.post('/api/send/email', (req, res) => {
-  console.log(req.body,'req.body')
-  const email = req.body.email;
-  const htmlContent = "<div>Mail Body Content</div>";
-  const emailSubject = "Test Mail Subject";
-  sendEmail(email, htmlContent, emailSubject).then((data)=> {
-    console.log(data,'res')
-    res.status(200).json({ data : data })
-  }).catch((err)=> {
-    console.log(err,'err',err.message)
-    res.status(400).json({ data : err })
-  })
+console.log("dirname:", dirname);
+console.log("Static path for public:", path.join(dirname, "public"));
+console.log("Static path for uploads:", path.join(dirname, "uploads"));
+
+
+app.use(morgan('dev'));
+
+app.get('/v1/api/health-status', (req, res) => {
+  res.json({
+    code : 200,
+    status : true,
+    message : "System is Healthy"
+  });
 });
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).send('healthy wealthy');
+const whiteList = async () => {
+  const findList = await WhiteList.find()
+  return findList.map((item)=> item.url)
+}
+
+let corsOptions = {
+  origin:  async (origin, callback) => {
+    try {
+      const whiteListUrls = await whiteList();
+      // console.log("CORS whiteListUrls:", whiteListUrls,origin);  
+      if (!origin || whiteListUrls.includes(origin)) {
+        callback(null, true); 
+      } else {
+        callback(new Error("Not allowed by CORS")); 
+      }
+    } catch (err) {
+      callback(err);
+    }
+  },
+  credentials: true
+}
+
+app.use(cors(corsOptions));
+
+// Middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTION');
+  next();
 });
 
+// ALL INVALID ROUTES
+routes(app);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.get('*', (req, res) => {
+  res.status(404).json({
+    code: 404,
+    info: 'Not Found.',
+    status: true,
+    message: 'The resource you looking for needs an valid end point.11',
+  });
 });
+
+export default app;

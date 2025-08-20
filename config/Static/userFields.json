@@ -1,0 +1,107 @@
+[
+  {
+    "label": "Profile Photo",
+    "value": "profile_photo",
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "First Name",
+    "value": "first_name",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Last Name",
+    "value": "last_name",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Mobile Number",
+    "value": "mobile_number",
+    "required" : true
+  },
+  {
+    "label": "DOB",
+    "value": "date_of_birth",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Customer Id",
+    "value": "customer_id",
+    "required" : true
+  },
+  {
+    "label": "Address",
+    "value": "address",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Pin Code",
+    "value": "pin_code",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "City",
+    "value": "city",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "State",
+    "value": "state",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Country",
+    "value": "country",
+    "required" : true,
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Workshop Name",
+    "value": "workshop_name",
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Vehicle Type",
+    "value": "vehicle_type",
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Email",
+    "value": "email",
+    "profile" : true
+  },
+  {
+    "label": "Gender",
+    "value": "gender",
+    "registration" : true,
+    "profile" : true
+  },
+  {
+    "label": "Anniversary Date",
+    "value": "anniversary",
+    "profile" : true
+  },
+  {
+    "label": "GST Number",
+    "value": "gst_number",
+    "profile" : true
+  }
+]
