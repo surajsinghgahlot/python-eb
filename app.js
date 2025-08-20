@@ -33,57 +33,6 @@ app.get('/health', (req, res) => {
   }
 });
 
-// Cache for whitelist URLs to avoid database queries on every request
-let whitelistCache = [];
-let whitelistCacheTime = 0;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-
-const whiteList = async () => {
-  try {
-    // Check if cache is still valid
-    const now = Date.now();
-    if (whitelistCache.length > 0 && (now - whitelistCacheTime) < CACHE_DURATION) {
-      return whitelistCache;
-    }
-    
-    // Check if database is connected
-    if (mongoose.connection.readyState !== 1) {
-      console.log("Database not connected, using cached whitelist or allowing all origins");
-      return whitelistCache.length > 0 ? whitelistCache : ['*']; // Allow all if no cache and DB not ready
-    }
-    
-    const findList = await WhiteList.find().lean();
-    whitelistCache = findList.map((item) => item.url);
-    whitelistCacheTime = now;
-    return whitelistCache;
-  } catch (err) {
-    console.log("Error fetching whitelist:", err);
-    // Return cached data if available, otherwise allow all origins
-    return whitelistCache.length > 0 ? whitelistCache : ['*'];
-  }
-}
-
-let corsOptions = {
-  origin: async (origin, callback) => {
-    try {
-      const whiteListUrls = await whiteList();
-      // console.log("CORS whiteListUrls:", whiteListUrls, origin);  
-      if (!origin || whiteListUrls.includes('*') || whiteListUrls.includes(origin)) {
-        callback(null, true); 
-      } else {
-        callback(new Error("Not allowed by CORS")); 
-      }
-    } catch (err) {
-      console.log("CORS error:", err);
-      // Allow request if there's an error (fail open for now)
-      callback(null, true);
-    }
-  },
-  credentials: true
-}
-
-app.use(cors(corsOptions));
-
 // Middleware
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
