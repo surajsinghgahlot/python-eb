@@ -77,20 +77,8 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_NAME"
-    value     = var.db_name
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "LIVE_URL_DB"
     value     = var.db_host
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_PORT"
-    value     = var.db_port
   }
 
   setting {

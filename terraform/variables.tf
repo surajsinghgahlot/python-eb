@@ -117,18 +117,8 @@ variable "email_smtp_secure" {
   type        = string
 }
 
-variable "db_name" {
-  description = "Database name"
-  type        = string
-}
-
 variable "db_host" {
   description = "Database host"
-  type        = string
-}
-
-variable "db_port" {
-  description = "Database port"
   type        = string
 }
 

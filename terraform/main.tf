@@ -37,6 +37,7 @@ module "elastic_beanstalk" {
   iam_service_role     = module.iam.beanstalk_service_role_name
   elastic_beanstalk_security_group_id = module.vpc.elastic_beanstalk_security_group_id
   load_balancer_security_group_id     = module.vpc.load_balancer_security_group_id
+
   #env config
   email_smtp_host     = var.email_smtp_host
   mail_service        = var.mail_service
@@ -44,9 +45,7 @@ module "elastic_beanstalk" {
   email_smtp_username = var.email_smtp_username
   email_smtp_password = var.email_smtp_password
   email_smtp_secure   = var.email_smtp_secure
-  db_name  = var.db_name
   db_host  = var.db_host
-  db_port  = var.db_port
   access_token_secret           = var.access_token_secret
   access_token_timeout_duration = var.access_token_timeout_duration
   refresh_token_secret          = var.refresh_token_secret
