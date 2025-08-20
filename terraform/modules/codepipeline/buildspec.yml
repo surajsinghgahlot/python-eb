@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    commands:
+      - echo "Creating zip file of the application..."
+      - zip -r application.zip . -x "terraform/*" ".git/*" ".DS_Store" ".gitignore" "node_modules/.cache/*"
+artifacts:
+  files:
+    - application.zip
+  discard-paths: yes

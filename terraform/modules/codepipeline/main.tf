@@ -25,6 +25,53 @@ resource "aws_s3_bucket_public_access_block" "artifact_store" {
   restrict_public_buckets = true
 }
 
+# CodeBuild Project for creating ZIP file
+resource "aws_codebuild_project" "build" {
+  name          = "${var.environment}-${var.application_name}-build"
+  description   = "Build project for ${var.application_name}"
+  build_timeout = "10"
+  service_role  = var.codebuild_service_role_arn
+
+  artifacts {
+    type = "CODEPIPELINE"
+  }
+
+  environment {
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+    type                        = "LINUX_CONTAINER"
+    image_pull_credentials_type = "CODEBUILD"
+    privileged_mode             = false
+
+    environment_variable {
+      name  = "ENVIRONMENT"
+      value = var.environment
+    }
+
+    environment_variable {
+      name  = "APPLICATION_NAME"
+      value = var.application_name
+    }
+  }
+
+  source {
+    type      = "CODEPIPELINE"
+    buildspec = file("${path.module}/buildspec.yml")
+  }
+
+  logs_config {
+    cloudwatch_logs {
+      group_name  = "/aws/codebuild/${var.environment}-${var.application_name}"
+      stream_name = "build-log"
+    }
+  }
+
+  tags = {
+    Name        = "${var.environment}-${var.application_name}-build"
+    Environment = var.environment
+  }
+}
+
 # CodePipeline
 resource "aws_codepipeline" "pipeline" {
   name     = "${var.environment}-${var.application_name}-pipeline"
@@ -57,6 +104,24 @@ resource "aws_codepipeline" "pipeline" {
   }
 
   stage {
+    name = "Build"
+
+    action {
+      name            = "Build"
+      category        = "Build"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      input_artifacts = ["source_output"]
+      output_artifacts = ["build_output"]
+      version         = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.build.name
+      }
+    }
+  }
+
+  stage {
     name = "Deploy"
 
     action {
@@ -64,7 +129,7 @@ resource "aws_codepipeline" "pipeline" {
       category        = "Deploy"
       owner           = "AWS"
       provider        = "ElasticBeanstalk"
-      input_artifacts = ["source_output"]
+      input_artifacts = ["build_output"]
       version         = "1"
 
       configuration = {
