@@ -267,12 +267,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:environment:process:default"
-    name      = "InitialProcessCount"
-    value     = "1"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:environment:process:default"
     name      = "StickinessEnabled"
     value     = "false"
   }
