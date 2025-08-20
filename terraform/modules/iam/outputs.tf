@@ -18,11 +18,6 @@ output "beanstalk_instance_role_arn" {
   value       = aws_iam_role.beanstalk_instance_role.arn
 }
 
-output "codebuild_service_role_arn" {
-  description = "CodeBuild service role ARN"
-  value       = aws_iam_role.codebuild_service_role.arn
-}
-
 output "codepipeline_service_role_arn" {
   description = "CodePipeline service role ARN"
   value       = aws_iam_role.codepipeline_service_role.arn

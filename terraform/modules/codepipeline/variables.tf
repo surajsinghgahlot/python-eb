@@ -29,11 +29,6 @@ variable "github_oauth_token" {
   type        = string
 }
 
-variable "codebuild_service_role_arn" {
-  description = "CodeBuild service role ARN"
-  type        = string
-}
-
 variable "codepipeline_service_role_arn" {
   description = "CodePipeline service role ARN"
   type        = string
