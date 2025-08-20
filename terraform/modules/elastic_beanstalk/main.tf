@@ -300,7 +300,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "RollingUpdateType"
-    value     = "Health"
+    value     = "Immutable"
   }
 
   setting {
@@ -318,7 +318,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "PauseTime"
-    value     = "PT0S"
+    value     = "PT30S"
   }
 
   # Node.js environment settings
